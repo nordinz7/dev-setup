@@ -32,12 +32,14 @@ case "$DISTRO" in
         ;;
     arch|manjaro)
         PKG_MANAGER="pacman"
+        PKG_INSTALL_CMD="-Syu --noconfirm"
         ;;
     opensuse|suse)
         PKG_MANAGER="zypper"
         ;;
     alpine)
         PKG_MANAGER="apk"
+        PKG_INSTALL_CMD="add --no-cache"
         ;;
     *)
         echo "Unknown Linux distribution: $DISTRO"
@@ -51,3 +53,4 @@ echo "Detected package manager: $PKG_MANAGER"
 
 export DISTRO
 export PKG_MANAGER
+export PKG_INSTALL_CMD=${PKG_INSTALL_CMD:-"install"}

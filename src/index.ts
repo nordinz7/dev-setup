@@ -23,7 +23,7 @@ for (const aptPackage of aptPackages) {
     continue;
   }
     await $ `echo  $PKG_MANAGER`
-    await $`sudo $PKG_MANAGER install -y ${aptPackage}`.nothrow();
+    await $`sudo $PKG_MANAGER $PKG_INSTALL_CMD ${aptPackage}`.nothrow();
   } catch (error) {
     console.log(error);
   }
