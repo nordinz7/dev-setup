@@ -7,3 +7,8 @@ export const isExistContent = async (path: string) => {
 
   return !!content;
 }
+
+export const getFileExtension = (fileName: string) => {
+  const s = fileName.split('').findLastIndex((c) => c === '.');
+  return fileName.slice(s + 1);
+}

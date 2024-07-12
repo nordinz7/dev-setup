@@ -4,15 +4,33 @@ import { $ } from "bun";
 export const softwares = [
   {
     name: "Visual Studio Code",
-    link: "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64"
+    link: "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64",
+    fileName: "vscode",
+    fileExt: "deb",
+    bin: "code"
   },
   {
     name: "MongoDB Compass",
-    link: "https://downloads.mongodb.com/compass/mongodb-mongosh_2.2.11_amd64.deb"
+    link: "https://downloads.mongodb.com/compass/mongodb-compass_1.43.4_amd64.deb",
+    fileName: "mongodb-compass",
+    fileExt: "deb",
+    bin: "mongodb-compass"
   },
   {
     name: 'exa',
-    link: 'https://github.com/ogham/exa/releases/download/v0.10.0/exa-linux-x86_64-v0.10.0.zip'
+    link: 'https://github.com/ogham/exa/releases/download/v0.10.0/exa-linux-x86_64-v0.10.0.zip',
+    installCommand: $`sudo unzip exa.zip -d /usr/local/bin`,
+    fileName: 'exa',
+    fileExt: 'zip',
+    bin: 'exa'
+  },
+  {
+    name: 'nvim',
+    link: 'https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz',
+    installCommand: $`sudo tar -C /opt -xzf ../temp/nvim.tar.gz && echo export PATH="$PATH:/opt/nvim-linux64/bin" >> ~/.zshrc && source ~/.zshrc`,
+    fileName: 'nvim',
+    fileExt: 'tar.gz',
+    bin: 'nvim'
   }
 ]
 
@@ -42,15 +60,13 @@ export const commands = [
   {
     name:'kubectl',
     contentPath: '/usr/local/bin/kubectl',
-    command: $`   curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl`
+    command: $`curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" && sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl`
   }
 ]
 
 export const aptPackages = [
-// 'build-essential',
 'gparted',
 'vim',
-'nvim',
 'neofetch',
 'stacer',
 'htop',
