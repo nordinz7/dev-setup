@@ -65,6 +65,8 @@ export const commands = [
 ]
 
 export const aptPackages = [
+'curl',
+'wget',
 'gparted',
 'vim',
 'neofetch',
@@ -76,6 +78,4 @@ export const aptPackages = [
 'gcc',
 'git-flow',
 'zsh',
-'curl',
-'wget',
 ]
