@@ -26,10 +26,10 @@ export const softwares = [
   },
   {
     name: 'nvim',
-    link: 'https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz',
-    installCommand: $`sudo tar -C /opt -xzf .temp/nvim.tar.gz && echo export PATH="$PATH:/opt/nvim-linux64/bin" >> ~/.zshrc`,
+    link: 'https://github.com/neovim/neovim/releases/latest/download/nvim.appimage',
+    installCommand: $`sudo chmod +x .temp/nvim.appimage && sudo mv .temp/nvim.appimage /usr/local/bin/nvim`,
     fileName: 'nvim',
-    fileExt: 'tar.gz',
+    fileExt: 'appimage',
     bin: 'nvim'
   }
 ]
