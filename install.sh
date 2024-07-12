@@ -24,4 +24,6 @@ else
     echo "Bun is already installed."
 fi
 
+bun install
+
 bun ./src/index.ts
