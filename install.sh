@@ -2,19 +2,24 @@
 
 echo -e "\e[32mInstall script started...\e[0m"
 
-sudo apt install update -y
-sudo apt install upgrade -y
-sudo apt install build-essential
+source detectOs.sh
 
+if [ "$DISTRO" != "ubuntu" ] && [ "$DISTRO" != "debian" ]; then
+    echo "This script only supports Ubuntu/Debian distributions."
+    exit 1
+fi
 
-source ./src/detectOs.sh
+sudo $PKG_MANAGER $PKG_INSTALL_CMD update -y
+sudo $PKG_MANAGER $PKG_INSTALL_CMD upgrade -y
+sudo $PKG_MANAGER $PKG_INSTALL_CMD build-essential
+
 
 if ! which bun > /dev/null; then
     echo "Bun not found. Installing..."
     curl -fsSL https://bun.sh/install | bash
        # Add bun to PATH for the current session
     export PATH="$HOME/.bun/bin:$PATH"
-    exec /usr/bin/zsh
+    exec $SHELL
 else
     echo "Bun is already installed."
 fi

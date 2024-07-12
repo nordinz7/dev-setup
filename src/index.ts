@@ -1,6 +1,6 @@
 import { $ } from "bun";
 import { aptPackages, commands, softwares } from "./softwares";
-import { getFileExtension, isExistContent } from "./utils";
+import { getFileExtension, isExistContent, isInstalled } from "./utils";
 import { readdir } from "node:fs/promises";
 
 await $`echo "Hello World!"`; // Hello World!
@@ -8,10 +8,7 @@ await $`echo "Hello World!"`; // Hello World!
 await $ `echo "Setting up apt packages"`;
 for (const aptPackage of aptPackages) {
   try {
-  const installedPath = (await $`which ${aptPackage}`.quiet().nothrow().text())
-  const isInstalled = !installedPath.includes('not found')
-
-  if (isInstalled) {
+  if (await isInstalled(aptPackage)) {
     await $`echo "${aptPackage}" is already installed`;
     continue;
   }
@@ -26,14 +23,14 @@ await $`echo "Setting up commands"`;
 for (const command of commands) {
   const a = await isExistContent(command.contentPath);
 
-  if (a) {
-    await $`echo "${command.name}" is already set up`;
+  if (a || await isInstalled(command.bin)) {
+    await $`echo "${command.bin}" is already set up`;
     continue;
   }
 
-  await $`echo Setting up "${command.name}"`;
+  await $`echo Setting up "${command.bin}"`;
   await command.command;
-  await $`echo "${command.name}"`;
+  await $`echo "${command.bin}"`;
 }
 
 const tempDir = '.temp';
@@ -41,10 +38,7 @@ await $`mkdir -p ${tempDir}`;
 
 await $`echo "Downloading softwares"`;
 for (const software of softwares) {
-  const binLocation = await $ `which ${software.bin}`.quiet().nothrow().text();
-  const isInstalled = !binLocation.includes('not found');
-
-  if (isInstalled) {
+  if (await isInstalled(software.bin)) {
     await $`echo "${software.name}" is already installed`;
     continue;
   }
