@@ -27,7 +27,7 @@ export const softwares = [
   {
     name: 'nvim',
     link: 'https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz',
-    installCommand: $`sudo tar -C /opt -xzf ../temp/nvim.tar.gz && echo export PATH="$PATH:/opt/nvim-linux64/bin" >> ~/.zshrc && source ~/.zshrc`,
+    installCommand: $`sudo tar -C /opt -xzf .temp/nvim.tar.gz && echo export PATH="$PATH:/opt/nvim-linux64/bin" >> ~/.zshrc`,
     fileName: 'nvim',
     fileExt: 'tar.gz',
     bin: 'nvim'
